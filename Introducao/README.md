@@ -146,11 +146,7 @@ scanf("%[a-z]", &letras);
 // Exemplo: 123 FGH ##$$abcdeFgh   --> ele vai ler 123 FGH ##$$
 scanf("%[^a-z]", &letras);
 
-// Leitura de qualquer coisa EXCETO as letras minúsculas
-// Exemplo: 123 FGH ##$$abcdeFgh   --> ele vai ler 123 FGH ##$$
-scanf("%[^a-z]", &letras);
-
-// Leitura das 6 primeiras letras maiúsculas
+// Leitura das 4 primeiras letras maiúsculas
 // Exemplo: ABCDEFG --> ele vai ler ABCD
 scanf("%4[A-Z]", &abreviatura);
 
@@ -410,7 +406,7 @@ O método `map` no código acima vai aplicar a função `float` para cada elemen
 lista da linha, apartir do elemento de número 3, até o fim. O método `list` vai
 transformar a saída do map em uma lista que você pode imprimir e acessar.
 
-Se a necessidade for ler até o `EOF`, o método input não é capaz de dectar. Então
+Se a necessidade for ler até o `EOF`, o método input não é capaz de detectar. Então
 é necessário utilizar o `sys.stdin`. Que também vai retornar as linhas no formato
 de string.
 

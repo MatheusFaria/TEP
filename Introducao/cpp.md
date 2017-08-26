@@ -14,8 +14,8 @@ o [malloc](http://en.cppreference.com/w/c/memory/malloc) faz.
 * `bool`: é um tipo que pode assumir os valores `true` ou `false`, veradedeiro ou
 falso, respectivamente.
 * `char`: tipo integral que representa um caractere. Os valores dos caracteres
-pertencem a tabela ASCII. Podem ter os modificadores de
-`signed char` e `unsigned char`.
+pertencem a [tabela ASCII](http://en.cppreference.com/w/cpp/language/ascii).
+Podem ter os modificadores de `signed char` e `unsigned char`.
 * `int`: tipo integral que representa números inteiros, sem parte fracionária. É
 possível extender o seu tamanho com os modificadores: `long` e `long long`. E modificar
 o seu sinal com: `unsigned` e `signed`.
@@ -206,7 +206,8 @@ Se o tipo tiver uma representação em string, então ele será convertido. Por 
 
 O C++ 11 introduziu uma semantica para a criação de tipo, além de classes e structs.
 Utilizando a palavra reservada `using`, é possível criar um tipo com nome
-customizado, baseado em um tipo existente.
+customizado, baseado em um tipo existente. Com isso você pode ter código mais
+claros e objetivos, sem tipos muito longos atrapalhando a leitura.
 
 ```cpp
 using lld = long long int;
@@ -217,3 +218,43 @@ lld y = 32;
 ld z = 32.45;
 meu_tipo x = 123678;
 ```
+
+### Inferindo tipos
+
+Outra __feature__ adicionada no C++ 11 foi o uso da palavra reservada `auto`.
+Que permite que você infira qual o tipo da variável dada a expressão. Com isso
+você não precisa escrever o tipo dela, você só declara ela como `auto`.
+
+```cpp
+auto nome = "Roberto"; // nome é inferido como um tipo string
+
+vector<int> v;
+auto it = v.begin(); // it é inferido como um tipo vector<int>::iterator
+```
+
+O uso da inferência de tipos ajuda a escrita e flexibilização do seu código.
+Ajuda na escrita, pois você não precisa lembrar e escrever tipo muito grandes e
+verbosos demais. E ajuda na flexibilização, pois se você precisar alterar, por exemplo,
+o `vector<int>` para `vector<string>`, o auto já vai inferir o novo tipo para você,
+ao invês de você ter que trocar de `vector<int>::iterator` para
+`vector<string>::iterator`.
+
+
+## Exercícios
+
+1. UVA
+    1. [694 - The Collatz Sequence](https://uva.onlinejudge.org/external/6/694.pdf)
+    1. [10591 - Happy Number](https://uva.onlinejudge.org/external/105/10591.pdf)
+    1. [490 - Rotating Sentences](https://uva.onlinejudge.org/external/4/490.pdf)
+    1. [10260 - Soundex](https://uva.onlinejudge.org/external/102/10260.pdf)
+1. URI
+    1. [1768 - Christmas Tree](https://www.urionlinejudge.com.br/judge/en/problems/view/1768)
+    1. [1196 - WERTYU](https://www.urionlinejudge.com.br/judge/en/problems/view/1196)
+
+## Referências
+
+HALIM, Steve; HALIM, Felix. [Competitive Programming 3](http://cpbook.net/), Lulu, 2013.
+
+C++ Reference [Basic String](http://en.cppreference.com/w/cpp/string/basic_string)
+
+C++ Reference [Fundamental Types](http://en.cppreference.com/w/cpp/language/types)

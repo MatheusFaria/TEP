@@ -37,10 +37,10 @@ de complexidade destes pode ser achada na documentação de cada um. A seguir h�
 uma breve lista de alguns que existe na STL.
 
 1. [Algoritmos de Min e Max: min, max, minmax](#algoritmos-de-min-e-max)
-1. [Algoritmos de Modificação: swap, reverse](#algoritmos-de-modificacao)
+1. [Algoritmos de Modificação: swap, reverse](#algoritmos-de-modificação)
 1. [Algoritmos de Busca: lower_bound, upper_bound, binary_search](#algoritmos-de-busca)
-1. [Algoritmos de Ordenação: sort, stable_sort](#algoritmos-de-ordenacao)
-1. [Algoritmos de Permutação: next_permutation, prev_permutation](#algoritmos-de-permutacao)
+1. [Algoritmos de Ordenação: sort, stable_sort](#algoritmos-de-ordenação)
+1. [Algoritmos de Permutação: next_permutation, prev_permutation](#algoritmos-de-permutação)
 
 ## Estruturas Lineares
 

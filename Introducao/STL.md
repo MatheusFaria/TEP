@@ -23,11 +23,11 @@ Eles são classificados em:
    1. Deque
    1. Array
 1. Estruturas Não-Lineares
-   1. Map
-   1. Set
-   1. Priority Queue
-   1. Unordered Map (Hash table)
-   1. Unordered Set (Hash table)
+   1. [Map](#map)
+   1. [Set](#set)
+   1. [Priority Queue](#priority-queue)
+   1. [Unordered Map](#unordered-map)
+   1. [Unordered Set](#unordered-set)
    1. Multimap
    1. Multiset
 
@@ -36,11 +36,10 @@ A STL também possui a implementação genérica de vários
 de complexidade destes pode ser achada na documentação de cada um. A seguir há
 uma breve lista de alguns que existe na STL.
 
-1. Algoritmos de Min e Max: min, max, minmax
-1. Algoritmos de Modificação: swap, reverse
-1. Algoritmos de Busca: lower_bound, upper_bound, binary_search
+1. [Algoritmos de Min e Max: min, max, minmax](#algoritmos-de-min-e-max)
+1. [Algoritmos de Modificação: swap, reverse](#algoritmos-de-modificacao)
+1. [Algoritmos de Busca: lower_bound, upper_bound, binary_search](#algoritmos-de-busca)
 1. Algoritmos de Ordenação: sort, stable_sort, partial_sort
-1. Operações em conjuntos: merge, set_difference, set_intersection, set_union
 1. Algoritmos de Permutação: next_permutation, prev_permutation
 
 ## Estruturas Lineares
@@ -400,6 +399,298 @@ a ^ b; // 0101  -->  5
 ~a;    // 1001  --> -7
 ```
 
+## Estruturas Não Lineares
+
+### Map
+
+O [map](http://en.cppreference.com/w/cpp/container/map) é uma estrutura da dados
+que faz relações entre chaves e valores, onde para cada chave há um valor correspondente.
+Por exemplo, se você falar que a chave `"casa"` representa o valor `3`, toda vez
+que você referenciar a chave `"casa"` com o seu mapa `mapa["casa"]` ele irá te
+retornar `3`.
+
+Sua implementação interna é uma árvore binária de busca auto-balanceável, o que
+garante uma ótima complexidade para a busca de dados.
+
+A criação de um `map` recebe dois tipos, um tipo para indicar o tipo das chaves
+e outro para indicar o tipo dos valores. E a consulta dos valores é dada utilizando
+o operador de `[]` ou o método `find`.
+
+```cpp
+// Construtor vazio
+map<string, int> estados;
+
+// Inserção de itens
+estados["Mato Grosso"] = 66;
+estados["Bahia"] = 75;
+estados["Amazonas"] = 97;
+estados["Sergipe"] = 79;
+
+// Consulta de itens
+
+cout << estados["Mato Grosso"] << "\n";
+cout << estados["Bahia"] << "\n";
+
+// Remoção de itens
+estados.erase("Sergipe");
+
+// Procura de itens
+if (estados.find("Amazonas") != estados.end()) {
+    cout << "Estado encontrado!\n";
+}
+
+// Iteração sobre todos os itens
+for(auto chave_valor: estados)
+    cout << chave_valor.first << " => " << chave_valor.second << "\n";
+
+// Tamanho do mapa
+estados.size();
+
+// O mapa está vazio?
+estados.empty();
+
+// Limpar o mapa
+estados.clear();
+```
+
+### Set
+
+O [set](http://en.cppreference.com/w/cpp/container/set) é uma estrutura de dados
+que representa um conjunto de elementos. Ele possui as mesmas propriedades que um
+conjunto da matemática. Dentro dele não haverá a repetição de nenhum elemento.
+
+Assim como o `map`, o `set` é implementado como uma árvore binária de busca
+auto-balanceavel. O que faz dele uma ótima estrutra de dados para buscas.
+
+```cpp
+// Construtor vazio
+set<int> identificadores;
+
+// Inserção de itens
+identificadores.insert(68);
+identificadores.insert(33);
+identificadores.insert(108);
+identificadores.insert(42);
+
+// Remoção de itens
+identificadores.erase(33);
+
+// Checar se um item está no set
+if (identificadores.count(108) != 0) {
+    cout << "Encontrado!\n";
+}
+
+// Iteração sobre todos os itens
+for(auto item: identificadores)
+    cout << item << "\n";
+
+// Tamanho do set
+identificadores.size();
+
+// O set está vazio?
+identificadores.empty();
+
+// Limpar o set
+identificadores.clear();
+```
+
+### Priority Queue
+
+A [priority_queue](http://en.cppreference.com/w/cpp/container/priority_queue),
+fila de prioridades, constrói uma fila ordenada por um critério. Onde o primeiro
+lugar da fila é ocupado pelo elemento com a maior prioridade. Se um elemento que
+possui mais prioridade que os outros for inseridos nesta fila, ele passa a frente
+de todos os elementos com prioridade mais baixa que ele.
+
+A implementação da `priority_queue` é feita com a estrutura de dados `heap` que
+é uma árvore binária linearizada e ordenada pelo critério de ordenação. É uma ótima
+estrutra para ordenação de dados e consumo de dados com alta prioridade. Ela não serve
+para consultas extensivas, pois você só pode acessar o seu primeiro elemento,
+assim como a `queue`.
+
+```cpp
+// Construtor Vazio
+priority_queue<int> fila;
+
+// Inserção de elementos
+fila.push(4);
+fila.push(32);
+fila.push(10);
+fila.push(60);
+fila.push(27);
+
+// Consulta do primeiro elemento
+// No caso o elemento 60, pois a ordem padrão é a decrescente
+fila.top();
+
+// Remoção de um elemento
+fila.pop();
+
+// A fila está vazia
+fila.empty();
+
+// Tamanho da fila
+fila.size();
+```
+
+A ordem padrão da `priority_queue` é do maior para o menor. Caso seja necessário
+a ordem inversa, você pode utilizar o seguinte construtor, que ele vai fazer a ordem
+ir do menor para o maior.
+
+```cpp
+priority_queue<int, vector<int>, greater<int> > fila;
+```
+
+Qualquer tipo pode ser utilizado na `priority_queue`, desde que este tenha implentado
+o operador de `<` (menor que). Os tipos string, pair, int, double e char já possuem
+este operador implementado por padrão. Se você possui um tipo/classe/struct que você
+criou, você pode implementar o operador de `<` para este tipo.
+
+```cpp
+class Pessoa {
+public:
+    // Campos da pessoa
+    string nome;
+    int idade;
+    char sexo;
+
+    // Método construtor da pessoa
+    Pessoa(string n, int i, char s) {
+        nome = n;
+        idade = i;
+        sexo = s;
+    }
+
+    // Operador <
+    bool operator<(const Pessoa &p) const {
+        if (idade == p.idade) {
+            if (sexo == p.sexo) {
+                // Menor nome tem mais prioridade
+                return nome > p.nome;
+            }
+
+            // Menor sexo tem mais prioridade
+            return sexo > p.sexo;
+        }
+
+        return idade < p.idade;
+    }
+};
+
+int main() {
+    priority_queue<Pessoa> pessoas;
+
+    pessoas.push(Pessoa("Jorge", 35, 'M'));
+    pessoas.push(Pessoa("Joana", 60, 'F'));
+    pessoas.push(Pessoa("Amanda", 60, 'F'));
+    pessoas.push(Pessoa("Mario", 61, 'M'));
+    pessoas.push(Pessoa("Fabiana", 61, 'F'));
+
+    while(!pessoas.empty()) {
+        auto p = pessoas.top();
+        pessoas.pop();
+
+        printf("[%s, %d, %c]\n", p.nome.c_str(), p.idade, p.sexo);
+    }
+
+    return 0;
+}
+```
+
+Na definição do operador de `<` é necessária a seguinte assinatura:
+`bool operator<(const T &p) const;`, onde `T` é o tipo sendo implementado e
+`p` é o nome do paramêtro do tipo `T`. `p` vai assumir o valor do elemento que você
+esta comparando, ou seja, se houverem duas pessoas `Pessoa a` e `Pessoa b`, quando
+fizer a operação `a < b`, o operador `<` da pessoa `a` será chamado com o parâmetro
+`p` igual a pessoa `b`.
+
+### Unordered Map
+
+O [unordered_map](http://en.cppreference.com/w/cpp/container/unordered_map) é uma
+estrutura de dados que funciona de um jeito similar ao `map`. Ela possui as mesmas
+funções que o `map` possui, porém a sua consulta é mais eficiente que a do `map`.
+A maior diferença entro o `map` e o `unordered_map` é que o map guarda seu dados
+ordenados pela chave, e o `unordered_map` não possui ordem específica.
+
+A implementação do `unordered_map` é uma estrutura de `hash`, a qual é muito eficiente
+para consulta.
+
+```cpp
+// Construtor vazio
+unordered_map<string, int> estados;
+
+// Inserção de itens
+estados["Mato Grosso"] = 66;
+estados["Bahia"] = 75;
+estados["Amazonas"] = 97;
+estados["Sergipe"] = 79;
+
+// Consulta de itens
+
+cout << estados["Mato Grosso"] << "\n";
+cout << estados["Bahia"] << "\n";
+
+// Remoção de itens
+estados.erase("Sergipe");
+
+// Procura de itens
+if (estados.find("Amazonas") != estados.end()) {
+    cout << "Estado encontrado!\n";
+}
+
+// Iteração sobre todos os itens
+for(auto chave_valor: estados)
+    cout << chave_valor.first << " => " << chave_valor.second << "\n";
+
+// Tamanho do mapa
+estados.size();
+
+// O mapa está vazio?
+estados.empty();
+
+// Limpar o mapa
+estados.clear();
+```
+
+### Unordered Set
+
+O [unordered_set](http://en.cppreference.com/w/cpp/container/unordered_set),
+assim como o `unordered_map`, é uma estrutura de dados muito semelhante ao `set`,
+porém com uma busca muito mais eficiente, pois ela é implementada como uma `hash`.
+Ele também possui as mesmas propriedades de conjunto que o `set` possui.
+
+```cpp
+// Construtor vazio
+unordered_set<int> identificadores;
+
+// Inserção de itens
+identificadores.insert(68);
+identificadores.insert(33);
+identificadores.insert(108);
+identificadores.insert(42);
+
+// Remoção de itens
+identificadores.erase(33);
+
+// Checar se um item está no set
+if (identificadores.count(108) != 0) {
+    cout << "Encontrado!\n";
+}
+
+// Iteração sobre todos os itens
+for(auto item: identificadores)
+    cout << item << "\n";
+
+// Tamanho do set
+identificadores.size();
+
+// O set está vazio?
+identificadores.empty();
+
+// Limpar o set
+identificadores.clear();
+```
+
 ## Algoritmos de Min e Max
 
 Estes algoritmos identificam os maiores e menores valores, dado um conjunto de valores.
@@ -527,6 +818,44 @@ binary_search(data.begin(), data.end(), 4); // true
 
 Se você precisa da posição do elemento, você pode utilizar o método `lower_bound`
 para descobrir.
+
+## Iterators
+
+O método `find` retorna um `iterator`, que é um apontador para uma posição.
+Todos os containers da `STL` possuem dois iterators padrões, um que aponta para
+o início do container e outro que aponta para o fim. O `begin` aponta para o
+primeiro elemento daquele container, para o início. O `end` aponta para uma posição
+após o último elemento do container. Por exemplo:
+
+![Iterators](iterators.png)
+
+O método `find`, irá retornar um iterator para posição onde ele achou o elemento.
+Se ele não achar o elemento, então ele retorna o iterator `end`. Para acessar o
+valor que o iterator está apontando, você deve utilizar o operador de __dereference__ `*`.
+
+```cpp
+vector<int> v {1, 2, 3, 4, 5, 6};
+auto it = find(v.begin(), v.end(), 3);
+
+if (it != v.end()) {
+    cout << "Elemento encontrado: " << *it << "\n";
+}
+
+cout << *v.begin() << "\n";
+```
+
+Os parâmetros do método `find` são iteradores para o início e para o final
+do intervalo onde deve ser procurado o elemento. Para procurar em outro intervalo
+diferente do `[begin, end]`, você pode utilizar operações aritméticas de soma
+e subtração com os iterators. Então se você deseja procurar a partir da terceira
+posição até a penúltima, você pode `v.begin() + 2, v.end() - 1`.
+
+O `iterator` pode mudar o seu tipo interno de acordo com o container de quem ele
+veio. Os containers como o `map`, que guarda mais de um valor por elemento, no
+caso a chave e o valor, o `iterator` vai funcionar como um `pair`. Neste caso
+para acessar a chave você terá que acessar o primeiro campo do `pair` assim:
+`it->first`. Para acessar o valor: `it->second`.
+
 
 ## Exercícios
 

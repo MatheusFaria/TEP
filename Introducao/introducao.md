@@ -521,3 +521,33 @@ print(math.pi)
 # Valor do e
 print(math.e)
 ```
+
+```python
+import random
+
+# Um número aleatório
+print(random.randint(0, 10**7))
+
+# Um float aleatório
+print(random.uniform(0.0, 1.0))
+
+# Embaralhar uma lista
+lista = range(1000)
+random.shuffle(lista)
+print(lista)
+
+# Pegar K itens aleatórios de uma lista
+lista = range(1000)
+print(random.sample(lista, 30))
+```
+
+```python
+# Percorrer um intervalo de X posições
+for i in range(37):
+    print i
+
+# Percorrer os itens de uma lista
+lista = [4, 7, 12, 2, 123]
+for i in lista:
+    print i
+```

@@ -39,8 +39,8 @@ uma breve lista de alguns que existe na STL.
 1. [Algoritmos de Min e Max: min, max, minmax](#algoritmos-de-min-e-max)
 1. [Algoritmos de Modificação: swap, reverse](#algoritmos-de-modificacao)
 1. [Algoritmos de Busca: lower_bound, upper_bound, binary_search](#algoritmos-de-busca)
-1. Algoritmos de Ordenação: sort, stable_sort, partial_sort
-1. Algoritmos de Permutação: next_permutation, prev_permutation
+1. [Algoritmos de Ordenação: sort, stable_sort](#algoritmos-de-ordenacao)
+1. [Algoritmos de Permutação: next_permutation, prev_permutation](#algoritmos-de-permutacao)
 
 ## Estruturas Lineares
 
@@ -652,6 +652,11 @@ estados.empty();
 estados.clear();
 ```
 
+Pelo fato do `unordered_map` ser implementado como uma `hash`, o tipo de sua
+chave deve ser possivel de ser fazer uma `hash` dele. Todos os tipos nativos
+podem ser utilizados no `unordered_map`. O tipo `pair`, por exemplo, não pode
+ser utilizado, pois não é possível se extrair uma `hash` dele.
+
 ### Unordered Set
 
 O [unordered_set](http://en.cppreference.com/w/cpp/container/unordered_set),
@@ -818,6 +823,102 @@ binary_search(data.begin(), data.end(), 4); // true
 
 Se você precisa da posição do elemento, você pode utilizar o método `lower_bound`
 para descobrir.
+
+## Algoritmos de Ordenação
+
+A `STL` oferece alguns algoritmos para ordernar um conjunto de elementos, ele
+são: [sort](http://en.cppreference.com/w/cpp/algorithm/sort) e
+[stable_sort](http://en.cppreference.com/w/cpp/algorithm/stable_sort). Todos eles
+vão ordernar os elementos do menor para o maior.
+
+```cpp
+// Ordenação comum
+vector<int> v1 = {5, 7, 4, 2, 8, 6, 1, 9, 0, 3};
+sort(v1.begin(), v1.end());
+// 0 1 2 3 4 5 6 7 8 9
+```
+
+O `stable_sort` vai manter a ordem de ocorrência, ou seja, se houveram dois
+elementos iguais, o elemento que vier primeiro vai ficar antes do próximo.
+Assim como a `priority_queue`, todos eles espera, que o tipo do elemento que eles
+estão ordenando, tenha o operador `<` implementado.
+
+```cpp
+class Pessoa {
+public:
+    // Campos da pessoa
+    string nome;
+    int idade;
+    char sexo;
+
+    // Método construtor da pessoa
+    Pessoa(string n, int i, char s) {
+        nome = n;
+        idade = i;
+        sexo = s;
+    }
+
+    // Operador <
+    bool operator<(const Pessoa &p) const {
+        return idade < p.idade;
+    }
+};
+
+int main() {
+    vector<Pessoa> pessoas;
+    pessoas.push_back(Pessoa("Joana", 60, 'F'));
+    pessoas.push_back(Pessoa("Jorge", 35, 'M'));
+    pessoas.push_back(Pessoa("Fabiana", 61, 'F'));
+    pessoas.push_back(Pessoa("Amanda", 60, 'F'));
+    pessoas.push_back(Pessoa("Mario", 61, 'M'));
+
+    stable_sort(pessoas.begin(), pessoas.end());
+
+    for(auto p: pessoas)
+        printf("[%s, %d, %c]\n", p.nome.c_str(), p.idade, p.sexo);
+
+    /*
+    [Jorge, 35, M]
+    [Joana, 60, F]
+    [Amanda, 60, F]
+    [Fabiana, 61, F]
+    [Mario, 61, M]
+    */
+    return 0;
+}
+```
+
+## Algoritmos de Permutação
+
+Os algoritmos [next_permutation]() e [prev_permutation]() são utilizados para obter
+a próxima e a anterior permutações lexicográficas dos itens de um container. Ambos
+possuem os mesmo parâmetros de chamada, o que muda é a direção em que eles fazem
+a permuta dos itens.
+
+Quando não há mais permutações a se fazerem naquela direção, os métodos retornam
+`false`. Com isso você consegue saber todas as permutações de uma direção específica,
+como mostra o código a seguir.
+
+```cpp
+string s = "aba";
+
+do {
+    cout << s << '\n';
+} while(next_permutation(s.begin(), s.end()));
+```
+
+Para conseguir todas as permutações possíveis, você deve colocar os seus elementos
+na ordem da primeira permutação lexicográfica. Para fazer isso, você deve ordernar
+os itens.
+
+```cpp
+string s = "aba";
+sort(s.begin(), s.end());
+
+do {
+    cout << s << '\n';
+} while(next_permutation(s.begin(), s.end()));
+```
 
 ## Iterators
 

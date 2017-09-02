@@ -968,9 +968,21 @@ para acessar a chave você terá que acessar o primeiro campo do `pair` assim:
     1. [540 - Team Queue](https://uva.onlinejudge.org/external/5/540.pdf)
     1. [12100 - Printer Queue](https://uva.onlinejudge.org/external/121/12100.pdf)
     1. [10611 - The Playboy Chimp](https://uva.onlinejudge.org/external/106/10611.pdf)
+    1. [417 - Word Index](https://uva.onlinejudge.org/external/4/417.pdf)
+    1. [484 - The Department of Redundancy Department](https://uva.onlinejudge.org/external/4/484.pdf)
+    1. [11917 - Do Your Own Homework!](https://uva.onlinejudge.org/external/119/11917.pdf)
+    1. [11572 - Unique Snowflakes](https://uva.onlinejudge.org/external/115/11572.pdf)
+    1. [11286 - Conformity](https://uva.onlinejudge.org/external/112/11286.pdf)
+    1. [10815 - Andy’s First Dictionary](https://uva.onlinejudge.org/external/108/10815.pdf)
+    1. [11849 - CD](https://uva.onlinejudge.org/external/118/11849.pdf)
+    1. [10954 - Add All](https://uva.onlinejudge.org/external/109/10954.pdf)
 1. URI
     1. [1089 - Musical Loop](https://www.urionlinejudge.com.br/judge/problems/view/1089)
     1. [1062 - Rails](https://www.urionlinejudge.com.br/judge/problems/view/1062)
+    1. [1025 - Where is the Marble?](https://www.urionlinejudge.com.br/judge/en/problems/view/1025)
+    1. [1259 - Even and Odd](https://www.urionlinejudge.com.br/judge/en/problems/view/1259)
+    1. [1548 - Canteen Queue](https://www.urionlinejudge.com.br/judge/en/problems/view/1548)
+    1. [1104 - Exchanging Cards](https://www.urionlinejudge.com.br/judge/en/problems/view/1104)
 
 ## Referências
 

@@ -19,7 +19,7 @@ Eles são classificados em:
    1. [Queue](#queue)
    1. [Pair](#pair)
    1. [Bitset](#bitset)
-   1. List
+   1. [List](#list)
    1. Deque
    1. Array
 1. Estruturas Não-Lineares
@@ -397,6 +397,62 @@ a & b; // 0010  -->  2
 a | b; // 0111  -->  7
 a ^ b; // 0101  -->  5
 ~a;    // 1001  --> -7
+```
+
+### List
+
+A [list](http://en.cppreference.com/w/cpp/container/list) e a
+[forward_list](http://en.cppreference.com/w/cpp/container/forward_list)
+são estruturas que implementam listas duplamente e simplesmente encadeadas,
+respectivamente. Tais estruturas possuem um grande facilidade de alteração
+no início e no final, com complexidades constantes.
+
+```cpp
+// Criação de uma lista duplamente encadeada vazia
+list<int> my_list;
+
+// Inserção e remoção de elementos na frente
+my_list.push_front(32);
+my_list.pop_front(32);
+
+// Inserção e remoção de elementos atrás
+my_list.push_back(32);
+my_list.pop_back(32);
+
+// Acesso
+my_list.front(); // Primeiro elemento
+my_list.back();  // Último elemento
+
+// Tamanho
+my_list.size();
+
+// Checar se está vazia
+my_list.empty();
+
+// Limpar todos os elementos
+my_list.clear();
+```
+
+A interface da `forward_list` é igual a da `list`, porém sem os métodos de
+inserção e remoção de trás da lista, pois ambos não possuem complexidade
+constante. Também não possue o método `size`, que diz o tamanho da lista.
+
+```cpp
+// Criação de uma lista duplamente encadeada vazia
+forward_list<int> my_list;
+
+// Inserção e remoção de elementos na frente
+my_list.push_front(32);
+my_list.pop_front(32);
+
+// Acesso
+my_list.front(); // Primeiro elemento
+
+// Checar se está vazia
+my_list.empty();
+
+// Limpar todos os elementos
+my_list.clear();
 ```
 
 ## Estruturas Não Lineares

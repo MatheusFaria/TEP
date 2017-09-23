@@ -413,11 +413,11 @@ list<int> my_list;
 
 // Inserção e remoção de elementos na frente
 my_list.push_front(32);
-my_list.pop_front(32);
+my_list.pop_front();
 
 // Inserção e remoção de elementos atrás
 my_list.push_back(32);
-my_list.pop_back(32);
+my_list.pop_back();
 
 // Acesso
 my_list.front(); // Primeiro elemento
@@ -443,7 +443,7 @@ forward_list<int> my_list;
 
 // Inserção e remoção de elementos na frente
 my_list.push_front(32);
-my_list.pop_front(32);
+my_list.pop_front();
 
 // Acesso
 my_list.front(); // Primeiro elemento

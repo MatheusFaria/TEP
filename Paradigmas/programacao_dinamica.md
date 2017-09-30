@@ -64,9 +64,6 @@ int main () {
 Isto irá funcionar apenas com `0` e `-1`, com outros valores não é possível utilizar
 o `memset`.
 
-## Bottom Up e Top Down
-
-
 ## DPs Clássicas
 
 DPs Clássicas são DPs cujo o estado e transição já foram pensados e definidos.
@@ -108,8 +105,6 @@ que a configuração anterior, e ambos os itens cabem na mochila, pois a soma de
 pesos é `10`. Estes itens representam a escolha ótima que maximiza o valor que pode ser
 carregado na mochila.
 
-![Knapsack GIF](knapsack.gif)
-
 ```cpp
 #define MAX_W 1000
 #define MAX_V 1000
@@ -122,34 +117,103 @@ int V[MAX_ITENS];
 // matriz de memoização
 int memo[MAX_W][MAX_V];
 
-int knapsack(int item_i, int bag_capacity) {
+int knapsack(int i, int w) {
 
     // Caso o item não exista ou não mais caiba na mochila
     // nenhum valor será agregado
-    if (item_i == 0 || bag_capacity <= 0) return 0;
+    if (i < 0 || w <= 0) return 0;
 
     // Caso este estado já tenha sido resolvido
-    if (memo[item_i][bag_capacity] != -1) return memo[item_i][bag_capacity];
+    if (memo[i][w] != -1) return memo[i][w];
 
     // Caso o item estoure a capacidade da mochila
     // O item não será carregado
-    if (W[item_i - 1] > bag_capacity) {
-        return memo[item_i][bag_capacity] = knapsack(item_i - 1, bag_capacity);
-    }
-    else {
-        // Caso contrário o valor ótimo será o maior valor entre a decisão
-        // de não carregar o item e carregar o item
+    if (W[i] > w) return memo[i][w] = knapsack(i - 1, w);
 
-        return memo[item_i][bag_capacity] = max(
-            knapsack(item_i - 1, bag_capacity),
-            V[item_i - 1] + knapsack(item_i - 1, bag_capacity - W[item_i - 1])
-        );
-    }
+    // Caso contrário o valor ótimo será o maior valor entre a decisão
+    // de não carregar o item e carregar o item
+    return memo[i][w] = max(knapsack(i - 1, w),
+                            knapsack(i - 1, w - W[i]) + V[i]);
 }
 
 int main() {
     // Inicialização da matriz de memoização com -1
     memset(memo, -1, sizeof memo);
+}
+```
+
+#### Reconstruindo os itens
+
+Caso o problema queira saber os itens que foram pegos, é necessário fazer algumas
+alterações no código visto anteriormente. A cada vez que um item é pego, ele tem que
+ser registrado como pego na tabela de itens pegos. Assim quando chegarmos ao final
+do knapsack, conseguimos saber todos os itens pegos seguindo de volta os registros
+dos itens pegos.
+
+A função `reconstruct` faz todo o trabalho de separar os itens que foram pegos.
+E imprime eles na ordem que eles apareceram no input da questão. Para fazer esta
+reconstrução, ela checa se o item atual, inciando pelo último item, foi pego ou não.
+Se este foi pego, então o peso da mochila é reduzido de acordo com o peso do item
+pego. Ela faz isto para todos os itens.
+
+```cpp
+#define MAX_W 1000
+#define MAX_V 1000
+#define MAX_ITENS 1000
+
+// pesos e valores
+int W[MAX_ITENS];
+int V[MAX_ITENS];
+
+// matriz de memoização
+int memo[MAX_W][MAX_V];
+bool taken[MAX_W][MAX_V];
+
+int knapsack(int i, int w) {
+
+    // Caso o item não exista ou não mais caiba na mochila
+    // nenhum valor será agregado
+    if (i < 0 || w <= 0) return 0;
+
+    // Caso este estado já tenha sido resolvido
+    if (memo[i][w] != -1) return memo[i][w];
+
+    // Caso o item estoure a capacidade da mochila
+    // O item não será carregado
+    if (W[i] > w) return memo[i][w] = knapsack(i - 1, w);
+
+    // Caso contrário o valor ótimo será o maior valor entre a decisão
+    // de não carregar o item e carregar o item
+
+    auto not_take = knapsack(i - 1, w);
+    auto     take = knapsack(i - 1, w - W[i]) + V[i];
+
+    if (take > not_take) {
+        taken[i][w] = true;
+        return memo[i][w] = take;
+    }
+    else return memo[i][w] = not_take;
+}
+
+void reconstruct(int i, int w) {
+    stack <int> itens;
+
+    do {
+        if (taken[i][w]) {
+            w -= W[i];
+            itens.push(i);
+        }
+    } while(i--);
+
+    while(!itens.empty()) {
+        printf("%d %d\n", W[itens.top()], V[itens.top()]);
+        itens.pop();
+    }
+}
+
+int main() {
+    memset(memo, -1, sizeof memo);
+    memset(taken, false, sizeof taken);
 }
 ```
 
@@ -305,6 +369,70 @@ void reconstruct() {
 ```
 
 ### Coin Change
+
+Coin Change, ou problema do Troco, é uma DP Clássica que resolve problemas do tipo:
+dado um conjunto de moedas, qual o mínimo de moedas necessárias para formar um valor
+`V` específico.
+
+Por exemplo, se eu tenho as seguintes moedas disponíveis `{1, 3, 4, 5}`. Para obter
+o valor `7`, existe a estratégia gulosa de escolher as maiores moedas possíveis.
+Nesta estratégia as moedas escolhidas seriam `5 + 1 + 1`. Porém, a estrégia ótima
+do Coin Change, selecionaria as moedas `3 + 4`, pois é o menor número de moedas
+que formam `7`.
+
+```cpp
+#define MAX 1000010
+
+int coins[MAX];
+int memo[MAX];
+
+int coin_change(int V, int N) {
+    if (V == 0) return 0;
+    if (V < 0) return numeric_limits<int>::max();
+
+    if (memo[V] != -1) return memo[V];
+
+    int n_coins = numeric_limits<int>::max();
+    for(int i = 0; i < N; ++i) {
+        n_coins = min(n_coins, coin_change(V - coins[i], N));
+    }
+
+    return memo[V] = n_coins + 1;
+}
+
+int main() {
+    memset(memo, -1, sizeof memo);
+}
+```
+
+#### Coin Change: Número de possibilidades
+
+Alguns problemas não querem saber apenas o número mínimo de elementos, moedas,
+para formar um valor. Eles querem saber também de quantas maneiras distintas
+é possível formar o valor. Para resolver isto, existe uma variação do Coin Change,
+que conta de quantas maneirais possíveis o valor `V` é formado.
+
+```cpp
+#define MAX_COINS 11
+#define MAX_VALUE 40010
+
+int coins[MAX_COINS];
+int memo[MAX_COINS][MAX_VALUE];
+
+int coin_change_ways(int i, int V, int N) {
+    if (V == 0) return 1;
+    if (V < 0) return 0;
+    if (i == N) return 0;
+
+    if (memo[i][V] != -1) return memo[i][V];
+
+    return memo[i][V] = coin_change_ways(i + 1, V, N) + coin_change_ways(i, V - coins[i], N);
+}
+
+int main() {
+    memset(memo, -1, sizeof memo);
+}
+```
 
 ### Max Range Sum
 

@@ -108,7 +108,7 @@ void bfs_distance() {
 
     queue<int> to_visit;
     to_visit.push(initial_vertice);
-    distance[v] = 0;
+    distance[initial_vertice] = 0;
 
     while(!to_visit.empty()) {
         auto v = to_visit.front();
@@ -127,7 +127,17 @@ void bfs_distance() {
 ## Exercícios
 
 1. UVA
+    1. [118 - Mutant Flatworld Explorers](https://uva.onlinejudge.org/external/1/118.pdf)
+    1. [280 - Vertex](https://uva.onlinejudge.org/external/2/280.pdf)
+    1. [11831 -  Sticker Collector Robots](https://uva.onlinejudge.org/external/118/11831.pdf)
+    1. [11902 - Dominator](https://uva.onlinejudge.org/external/119/11902.pdf)
+    1. [12442 - Forwarding Emails](https://uva.onlinejudge.org/external/124/12442.pdf)
 1. URI
+    1. [1621 - Labyrinth](https://www.urionlinejudge.com.br/judge/problems/view/1621)
+    1. [1550 - Inversion](https://www.urionlinejudge.com.br/judge/problems/view/1550)
+    1. [1469 - Boss](https://www.urionlinejudge.com.br/judge/problems/view/1469)
+    1. [1928 - Memory Game](https://www.urionlinejudge.com.br/judge/problems/view/1928)
+    1. [1317 - I Hate SPAM, But Some People Love It](https://www.urionlinejudge.com.br/judge/problems/view/1317)
 
 ## Referências
 

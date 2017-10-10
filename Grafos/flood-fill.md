@@ -46,7 +46,9 @@ e decrementado as posições de x e y.
 ## Exercícios
 
 1. UVA
+    1. [260 - Il Gioco dell’X](https://uva.onlinejudge.org/external/2/260.pdf)
 1. URI
+    1. [1907 - Colouring Game Scenarios](https://www.urionlinejudge.com.br/judge/problems/view/1907)
 
 ## Referências
 

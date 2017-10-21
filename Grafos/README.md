@@ -248,10 +248,10 @@ um favorito, por isso é necessário estudar e aprender todos eles.
     1. Grafos Bipartidos
     1. Identificação de arestas
     1. Pontes e Pontos de Articulação
-    1. Componentes Fortemente Conectados
+    1. [Componentes Fortemente Conectados](scc.md)
 1. Árvore Geradora Mínima
 1. Algoritmos de Menor Caminho
-    1. Single Source Shortest Path (SSSP)
+    1. [Single Source Shortest Path (SSSP)](sssp.md)
     1. All-Pais Shortest Path (APSP)
 1. Network Flow
 

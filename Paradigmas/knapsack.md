@@ -147,6 +147,9 @@ int main() {
     1. [10819 - Trouble of 13-Dots](https://uva.onlinejudge.org/external/108/10819.pdf)
     1. [10130 - SuperSale](https://uva.onlinejudge.org/external/101/10130.pdf)
     1. [990 - Diving for gold](https://uva.onlinejudge.org/external/9/990.pdf)
+1. URI
+    1. [1286 - Motoboy](https://www.urionlinejudge.com.br/judge/en/problems/view/1286)
+    1. [2026 - Christmas Tree](https://www.urionlinejudge.com.br/judge/en/problems/view/2026)
 
 ## Referências
 

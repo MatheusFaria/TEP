@@ -14,6 +14,9 @@ esta parte deve ter uma solução ótima com o mesmo algoritmo.
 ## Exercícios
 
 1. UVA
+    1. [11264 - Coin Collector](https://uva.onlinejudge.org/external/112/11264)
+    1. [11389 - The Bus Driver Problem](https://uva.onlinejudge.org/external/113/11389)
+    1. [12405 - Scarecrow](https://uva.onlinejudge.org/external/124/12405)
 
 ## Referências
 

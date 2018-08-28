@@ -475,18 +475,18 @@ Algumas coisas úteis que pode se fazer com o python:
 import string
 
 # Imprime todas as letras do alfabeto
-print string.ascii_letters
+print(string.ascii_letters)
 
 # Imprime todas os digitos
-print string.digits
-print string.hexdigits
-print string.octdigits
+print(string.digits)
+print(string.hexdigits)
+print(string.octdigits)
 
 # Imprime todas as pontuações
-print string.punctuation
+print(string.punctuation)
 
 # Imprime todas caracteres imprimiveis
-print string.printable
+print(string.printable)
 ```
 
 ```python
@@ -498,7 +498,7 @@ from datetime import date
 a = date(2011,11,24)
 b = date(2011,11,17)
 
-print (a-b).days
+print((a-b).days)
 ```
 
 ```python
@@ -544,10 +544,10 @@ print(random.sample(lista, 30))
 ```python
 # Percorrer um intervalo de X posições
 for i in range(37):
-    print i
+    print(i)
 
 # Percorrer os itens de uma lista
 lista = [4, 7, 12, 2, 123]
 for i in lista:
-    print i
+    print(i)
 ```

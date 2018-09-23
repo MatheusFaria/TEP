@@ -100,7 +100,7 @@ a ligação na coluna `A` linha `B`, também marque a ligação coluna `B` linha
 int G[MAX_V][MAX_V];
 
 int main () {
-    memeset(G, 0, sizeof G);
+    memset(G, 0, sizeof G);
 
     int A = 2;   // vértice de id 2
     int B = 5;   // vértice de id 5

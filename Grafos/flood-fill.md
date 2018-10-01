@@ -19,7 +19,7 @@ E facilmente implementado com algumas alterações feitas no [DFS](travessia.md)
 char G[MAX_V][MAX_V];
 
 int dx[] = { 1,  1,  1, -1, -1, -1,  0,  0};
-int dy[] = {-1,  0,  1, -1,  0, -1, -1,  1};
+int dy[] = {-1,  0,  1, -1,  0,  1, -1,  1};
 
 int N, M; // Tamanho das colunas e linhas da matriz
 

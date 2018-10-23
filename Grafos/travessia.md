@@ -22,14 +22,14 @@ até o fundo. Isto é feito até que todos os vértices tenham sido explorados.
 #define MAX_V 1000
 
 vector<int> G[MAX_V];
-bool visited[MAX_V];
+int visited[MAX_V];
 
-void dfs(int v) {
-    visited[v] = true;
+void dfs(int u) {
+    visited[u] = 1;
 
-    for(auto i: G[v])
-        if (!visited[i])
-            dfs(i);
+    for(auto v: G[u])
+        if (!visited[v])
+            dfs(v);
 }
 
 int main() {
@@ -61,7 +61,7 @@ vai por camadas.
 #define MAX_V 1000
 
 vector<int> G[MAX_V];
-bool visited[MAX_V];
+int visited[MAX_V];
 
 void bfs() {
     memset(visited, 0, sizeof visited);
@@ -70,16 +70,16 @@ void bfs() {
 
     queue<int> to_visit;
     to_visit.push(initial_vertice);
-    visited[initial_vertice] = true;
+    visited[initial_vertice] = 1;
 
     while(!to_visit.empty()) {
-        auto v = to_visit.front();
+        auto u = to_visit.front();
         to_visit.pop();
 
-        for (auto i: G[v]) {
-            if (!visited[i]) {
-                visited[i] = true;
-                to_visit.push(i);
+        for (auto v: G[u]) {
+            if (!visited[v]) {
+                visited[v] = 1;
+                to_visit.push(v);
             }
         }
     }
@@ -111,13 +111,13 @@ void bfs_distance() {
     distance[initial_vertice] = 0;
 
     while(!to_visit.empty()) {
-        auto v = to_visit.front();
+        auto u = to_visit.front();
         to_visit.pop();
 
-        for (auto i: G[v]) {
-            if (distance[i] == -1) {
-                distance[i] = distance[v] + 1;
-                to_visit.push(i);
+        for (auto v: G[u]) {
+            if (distance[v] == -1) {
+                distance[v] = distance[u] + 1;
+                to_visit.push(v);
             }
         }
     }
